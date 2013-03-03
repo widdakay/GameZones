@@ -1,0 +1,11 @@
+name: CreativeSurvival
+main: com.yoerik.GameZones.GameZones
+version: 0.1
+author: Widakay
+
+commands:
+   gz:
+      description: GameZones main command.
+      usage: /gz help
+      permission: GameZones.main
+      permission-message: You don't have permission to use GameZones.
