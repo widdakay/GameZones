@@ -56,8 +56,14 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		long xPos = playerLocation.getBlockX();
 		long zPos = playerLocation.getBlockZ();
 		
-		
 		GameZone zone = new GameZone(xPos, zPos, world);
+		
+		if (zone.isClaimed()) {
+			player.sendMessage("This zone is already claimed by " + zone.getOwner());
+		}
+		else {
+			zone.claim(player);
+		}
 		return true;
 	}
 	private void printHelp(CommandSender sender) {

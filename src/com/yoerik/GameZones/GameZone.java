@@ -1,6 +1,7 @@
 package com.yoerik.GameZones;
 
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 public class GameZone {
 	long xPos;
@@ -14,6 +15,18 @@ public class GameZone {
 		xPos = x;
 		yPos = y;
 		world = worldPos;
+	}
+	public boolean isClaimed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public String getOwner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void claim(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
