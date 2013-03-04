@@ -1,10 +1,14 @@
 package com.yoerik.GameZones;
 
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.yoerik.GameZones.GameZones;
+import com.yoerik.GameZones.GameZone;
 
 public class GameZonesCommandExecutor implements CommandExecutor {
 
@@ -25,7 +29,12 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				}
 				
 				if (args[0].equalsIgnoreCase("claim")) {	// if claim command
-					printHelp(sender);
+					if (!(sender instanceof Player)) {
+						sender.sendMessage("This command can only be run by a player.");
+					} else {
+						Player player = (Player) sender;
+						return claimPlot(player);
+					}
 					return true;
 				}
 				
@@ -41,6 +50,16 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		return false;
 	}
 	
+	private boolean claimPlot(Player player) {
+		Location playerLocation = player.getLocation();
+		World world = playerLocation.getWorld();
+		long xPos = playerLocation.getBlockX();
+		long zPos = playerLocation.getBlockZ();
+		
+		
+		GameZone zone = new GameZone(xPos, zPos, world);
+		return true;
+	}
 	private void printHelp(CommandSender sender) {
 		sender.sendMessage("GameZones Help:");
 		sender.sendMessage("/gz claim  - claims the plot you are in");
