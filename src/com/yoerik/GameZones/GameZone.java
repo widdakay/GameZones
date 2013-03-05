@@ -35,8 +35,8 @@ public class GameZone {
 		z2 = new long[amnt];
 		//loop here to fill the arrays with the actual corners
 		for(int i = 0; i < amnt; i++){
-			World world = //Read world from plot here, using integer i
-			if(worldPos == world){
+			World world = null; //Read world from plot here, using integer i
+			if(this.world == world){
 			if(xPos <= x1[i] && xPos >= x2[i]){
 				if(zPos <= z1[i] && zPos >= z2[i]){
 					return true;

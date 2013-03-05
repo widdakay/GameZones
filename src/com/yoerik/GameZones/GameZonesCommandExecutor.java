@@ -39,7 +39,35 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				}
 
 				if (args[0].equalsIgnoreCase("set")) { // if set command
-					printHelp(sender);
+					if(!(GameZones.selectionsLeft.containsKey(sender.getName())) 
+							|| !(GameZones.selectionsRight.containsKey(sender.getName()))){
+						sender.sendMessage("You do not have a complete selection!");
+						return true; // or false?
+					} else if(GameZones.selectionsRight.containsKey(sender.getName()) 
+							&& GameZones.selectionsLeft.containsKey(sender.getName())){
+						Location loc1 = GameZones.selectionsRight.get(sender.getName());
+						Location loc2 = GameZones.selectionsLeft.get(sender.getName());
+						if(loc1.getWorld() != loc2.getWorld()){
+							sender.sendMessage("You do not have a complete selection!");
+							return true; // or false?
+						}
+						double x1 = loc1.getX();
+						double z1 = loc1.getZ();
+						double x2 = loc2.getX();
+						double z2 = loc2.getZ();
+						World world = loc1.getWorld();
+						if(x1 < x2){
+							double tmp = x1;
+							x1 = x2;
+							x2 = tmp;
+						}
+						if(z1 < z2){
+							double tmp = z1;
+							z1 = z2;
+							z2 = tmp;
+							// store x's, z's & world
+						}
+					}
 					return true;
 				}
 
@@ -70,6 +98,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 			}
 			return true;
 		}
+		return false;
 	}
 
 	private void printHelp(CommandSender sender) {
