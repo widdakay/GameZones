@@ -24,8 +24,12 @@ public class GameZone {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void claim(Player player) {
+	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
+		if (this.isClaimed()) {
+			return false;
+		}
+		return true;
 		
 	}
 	

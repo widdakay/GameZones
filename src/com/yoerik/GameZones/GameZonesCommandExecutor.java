@@ -62,7 +62,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 			player.sendMessage("This zone is already claimed by " + zone.getOwner());
 		}
 		else {
-			zone.claim(player);
+			return zone.claim(player);
 		}
 		return true;
 	}
