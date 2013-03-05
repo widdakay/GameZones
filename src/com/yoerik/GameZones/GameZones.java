@@ -1,4 +1,4 @@
-//This is a commit test and will be shown in "Commit Test A"
+//This is a edit to the last commit test and will be shown in commit "Commit Test B"
 
 package com.yoerik.GameZones;
 
