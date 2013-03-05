@@ -1,6 +1,3 @@
-//This is a edit to the last commit test and will be shown in commit "Commit Test B"
-// I (Widakay) added this
-
 package com.yoerik.GameZones;
 
 import java.util.logging.Logger;
