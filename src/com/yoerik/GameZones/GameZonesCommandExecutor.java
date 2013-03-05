@@ -23,12 +23,12 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 
 		if (cmd.getName().equalsIgnoreCase("gz")) {
 			if (args.length == 1) {
-				if (args[0].equalsIgnoreCase("help")) {	// if help command
+				if (args[0].equalsIgnoreCase("help")) { // if help command
 					printHelp(sender);
 					return true;
 				}
-				
-				if (args[0].equalsIgnoreCase("claim")) {	// if claim command
+
+				if (args[0].equalsIgnoreCase("claim")) { // if claim command
 					if (!(sender instanceof Player)) {
 						sender.sendMessage("This command can only be run by a player.");
 					} else {
@@ -37,19 +37,19 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 					}
 					return true;
 				}
-				
-				if (args[0].equalsIgnoreCase("set")) {	// if set command
+
+				if (args[0].equalsIgnoreCase("set")) { // if set command
 					printHelp(sender);
 					return true;
 				}
-				
+
 			}
-			
+
 			sender.sendMessage("GameZones main command.  Use /gz help for help.");
 		}
 		return false;
 	}
-	
+
 	private boolean claimPlot(Player player) {
 		Location playerLocation = player.getLocation();
 		World world = playerLocation.getWorld();
@@ -57,15 +57,21 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		long zPos = playerLocation.getBlockZ();
 		
 		GameZone zone = new GameZone(xPos, zPos, world);
-		
-		if (zone.isClaimed()) {
-			player.sendMessage("This zone is already claimed by " + zone.getOwner());
+
+		if (!(zone.isPlot())) {
+			player.sendMessage("You are not in a zone!");
+		} else {
+
+			if (zone.isClaimed()) {
+				player.sendMessage("This zone is already claimed by "
+						+ zone.getOwner());
+			} else {
+				return zone.claim(player);
+			}
+			return true;
 		}
-		else {
-			return zone.claim(player);
-		}
-		return true;
 	}
+
 	private void printHelp(CommandSender sender) {
 		sender.sendMessage("GameZones Help:");
 		sender.sendMessage("/gz claim  - claims the plot you are in");
