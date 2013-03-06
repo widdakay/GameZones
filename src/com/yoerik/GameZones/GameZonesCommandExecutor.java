@@ -15,7 +15,8 @@ import com.yoerik.GameZones.GameZone;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
-public class GameZonesCommandExecutor implements CommandExecutor {
+@SuppressWarnings("unused")
+public class GameZonesCommandExecutor implements CommandExecutor { 
 
 	private GameZones plugin; // pointer to your main class, unrequired
 
@@ -31,6 +32,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		return null;
 	}
 
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 
@@ -66,6 +68,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 						double x2 = sel.getMinimumPoint().getX();
 						double z1 = sel.getMaximumPoint().getZ();
 						double z2 = sel.getMinimumPoint().getZ();
+						World world = sel.getMaximumPoint().getWorld();
 						//Save points here
 						return true;
 					}
