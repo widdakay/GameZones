@@ -23,6 +23,7 @@ public class GameZone {
 		return false;
 	}
 
+<<<<<<< HEAD
 	public boolean isPlot(){
 		long[] x1;
 		long[] z1;
@@ -45,6 +46,11 @@ public class GameZone {
 		}
 		}
 		return true; //Return false later
+=======
+	public boolean isClaimable(){
+		
+		return true; // All locations are valid, for now.  
+>>>>>>> renamed and fixed isPlot function to isClaimable
 	}
 
 	public String getOwner() {
@@ -54,7 +60,7 @@ public class GameZone {
 
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
-		if(!(this.isPlot())){
+		if (!(this.isClaimable())) {
 			return false;
 		}
 		if (this.isClaimed()) {
