@@ -23,19 +23,37 @@ public class GameZone {
 		return false;
 	}
 
-	public boolean isPlot(){
-		return true; //Return false later
-<<<<<<< HEAD
-<<<<<<< HEAD
+	public boolean isPlot() {
+		long[] x1;
+		long[] z1;
+		long[] x2;
+		long[] z2; // Arrays of the corners of the plots, 1 being larger corner
+					// and 2 being smaller
+		World[] world;
+		int amnt = 0; // Amount of total corners/plots there are
+		x1 = new long[amnt];
+		z1 = new long[amnt];
+		x2 = new long[amnt];
+		z2 = new long[amnt];
+		world = new World[amnt];
+		// loop here to fill the arrays with the actual corners/worlds
+		for (int i = 0; i < amnt; i++) {
+			if (this.world == world[i]) {
+				if (xPos <= x1[i] && xPos >= x2[i]) {
+					if (zPos <= z1[i] && zPos >= z2[i]) {
+						return true;
+					}
+				}
+			}
+		}
+		return true; // Return false later
 	}
 
-	public boolean isClaimable(){
-		
-		return true; // All locations are valid, for now. 
-=======
->>>>>>> parent of 4e5c255... renamed and fixed isPlot function to isClaimable
-=======
->>>>>>> parent of 4e5c255... renamed and fixed isPlot function to isClaimable
+	public boolean isClaimable() {
+		if (this.isPlot() && !(this.isClaimed())) {
+			return true;
+		}
+		return true;
 	}
 
 	public String getOwner() {
@@ -45,16 +63,8 @@ public class GameZone {
 
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		if (!(this.isClaimable())) {
 			return false; // false?
-=======
-		if(!(this.isPlot())){
-			return false;
->>>>>>> Revert "renamed and fixed isPlot function to isClaimable"
-		}
-		if (this.isClaimed()) {
-			return false;
 		}
 		return true;
 
