@@ -1,5 +1,6 @@
 package com.yoerik.GameZones;
 
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -52,8 +53,10 @@ public class GameZone {
 	public boolean isClaimable() {
 		if (this.isPlot() && !(this.isClaimed())) {
 			return true;
+		} else if(!(this.isPlot()) || this.isClaimed()){
+			return false;
 		}
-		return true;
+		return false;
 	}
 
 	public String getOwner() {
@@ -64,10 +67,21 @@ public class GameZone {
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
 		if (!(this.isClaimable())) {
-			return false; // false?
+			return false; 
 		}
 		return true;
 
+	}
+	
+	public GameMode getGamemode(){
+		if(!(this.isPlot())){
+			return null;
+		} else if(this.isPlot()){
+			GameMode gm;
+			gm = null; //Get GameMode here
+			return gm;
+		}
+		return null;
 	}
 
 }
