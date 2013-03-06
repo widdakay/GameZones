@@ -25,11 +25,14 @@ public class GameZone {
 
 	public boolean isPlot(){
 		return true; //Return false later
+<<<<<<< HEAD
 	}
 
 	public boolean isClaimable(){
 		
 		return true; // All locations are valid, for now. 
+=======
+>>>>>>> parent of 4e5c255... renamed and fixed isPlot function to isClaimable
 	}
 
 	public String getOwner() {
@@ -39,8 +42,13 @@ public class GameZone {
 
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		if (!(this.isClaimable())) {
 			return false; // false?
+=======
+		if(!(this.isPlot())){
+			return false;
+>>>>>>> Revert "renamed and fixed isPlot function to isClaimable"
 		}
 		if (this.isClaimed()) {
 			return false;
