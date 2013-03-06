@@ -86,11 +86,11 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 
 		GameZone zone = new GameZone(xPos, zPos, world);
 
-		if (!(zone.isClaimable())) {
+		if (!(zone.isPlot())) {
 			player.sendMessage("You are not in a zone!");
 		} else {
 
-			if (zone.isClaimed() && (zone.getOwner() != player.getName())) {
+			if (zone.isClaimed()) {
 				player.sendMessage("This zone is already claimed by "
 						+ zone.getOwner());
 			} else {
