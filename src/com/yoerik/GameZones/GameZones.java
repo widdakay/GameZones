@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.yoerik.GameZones.GameZonesCommandExecutor;
 
 public class GameZones extends JavaPlugin {
@@ -21,9 +24,13 @@ public class GameZones extends JavaPlugin {
 	
 	public void onEnable() {
 		
+		Plugin we = Bukkit.getPluginManager().getPlugin("WorldEdit");
+		if (we == null) {
+			logger.severe("WorldEdit cannot be found. Please install WorldEdit before using this plugin.");
+		}
+		
 		this.saveDefaultConfig();
 		//getServer().getPluginManager().registerEvents(new CreativeSurvivalBlockListener(), this);
-		getServer().getPluginManager().registerEvents(new ClickListener(), this);
 		
 		getCommand("gz").setExecutor(new GameZonesCommandExecutor(this));	// register command
 		

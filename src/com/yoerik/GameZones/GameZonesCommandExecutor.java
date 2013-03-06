@@ -1,14 +1,19 @@
 package com.yoerik.GameZones;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import com.yoerik.GameZones.GameZones;
 import com.yoerik.GameZones.GameZone;
+
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.bukkit.selections.Selection;
 
 public class GameZonesCommandExecutor implements CommandExecutor {
 
@@ -16,6 +21,14 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 
 	public GameZonesCommandExecutor(GameZones plugin) {
 		this.plugin = plugin;
+	}
+
+	public static Selection getWorldEditSelection(Player ply) {
+		Plugin we = Bukkit.getPluginManager().getPlugin("WorldEdit");
+		if (we != null && we instanceof WorldEditPlugin) {
+			return ((WorldEditPlugin) we).getSelection(ply);
+		}
+		return null;
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -39,36 +52,23 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				}
 
 				if (args[0].equalsIgnoreCase("set")) { // if set command
-					if(!(GameZones.selectionsLeft.containsKey(sender.getName())) 
-							|| !(GameZones.selectionsRight.containsKey(sender.getName()))){
+					Selection sel = getWorldEditSelection((Player) sender);
+					if (sel == null) {
 						sender.sendMessage("You do not have a complete selection!");
 						return true; // or false?
-					} else if(GameZones.selectionsRight.containsKey(sender.getName()) 
-							&& GameZones.selectionsLeft.containsKey(sender.getName())){
-						Location loc1 = GameZones.selectionsRight.get(sender.getName());
-						Location loc2 = GameZones.selectionsLeft.get(sender.getName());
-						if(loc1.getWorld() != loc2.getWorld()){
-							sender.sendMessage("You do not have a complete selection!");
-							return true; // or false?
-						}
-						double x1 = loc1.getX();
-						double z1 = loc1.getZ();
-						double x2 = loc2.getX();
-						double z2 = loc2.getZ();
-						World world = loc1.getWorld();
-						if(x1 < x2){
-							double tmp = x1;
-							x1 = x2;
-							x2 = tmp;
-						}
-						if(z1 < z2){
-							double tmp = z1;
-							z1 = z2;
-							z2 = tmp;
-							// store x's, z's & world
-						}
 					}
-					return true;
+					if (sel.getMaximumPoint().getWorld() != sel
+							.getMinimumPoint().getWorld()) {
+						sender.sendMessage("You do not have a complete selection!");
+						return true; // or false?
+					} else {
+						double x1 = sel.getMaximumPoint().getX();
+						double x2 = sel.getMinimumPoint().getX();
+						double z1 = sel.getMaximumPoint().getZ();
+						double z2 = sel.getMinimumPoint().getZ();
+						//Save points here
+						return true;
+					}
 				}
 
 			}
@@ -83,7 +83,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		World world = playerLocation.getWorld();
 		long xPos = playerLocation.getBlockX();
 		long zPos = playerLocation.getBlockZ();
-		
+
 		GameZone zone = new GameZone(xPos, zPos, world);
 
 		if (!(zone.isClaimable())) {
