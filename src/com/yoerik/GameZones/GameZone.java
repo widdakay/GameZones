@@ -40,7 +40,7 @@ public class GameZone {
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
 		if (!(this.isClaimable())) {
-			return false;
+			return false; // false?
 		}
 		if (this.isClaimed()) {
 			return false;

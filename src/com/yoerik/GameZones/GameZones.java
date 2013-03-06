@@ -11,14 +11,12 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.yoerik.GameZones.GameZonesCommandExecutor;
 
 public class GameZones extends JavaPlugin {
 	
 	public final Logger logger = Logger.getLogger("Minecraft");
 	FileConfiguration config;
-	public static int toolId;
 	public static Map<String, Location> selectionsLeft = new HashMap<String, Location>();
 	public static Map<String, Location> selectionsRight = new HashMap<String, Location>();
 	
@@ -36,8 +34,6 @@ public class GameZones extends JavaPlugin {
 		
 		PluginDescriptionFile PDF = getDescription();
         logger.info((new StringBuilder(String.valueOf(PDF.getName()))).append(" version ").append(PDF.getVersion()).append(" enabled.").toString());
-        
-        toolId = config.getInt("gztool"); //Get item ID for selection tool
 	}
 
 	public void onDisable() {
