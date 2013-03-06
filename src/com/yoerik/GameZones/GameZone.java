@@ -23,34 +23,13 @@ public class GameZone {
 		return false;
 	}
 
-<<<<<<< HEAD
 	public boolean isPlot(){
-		long[] x1;
-		long[] z1;
-		long[] x2;
-		long[] z2; //Arrays of the corners of the plots, 1 being larger corner and 2 being smaller
-		int amnt = 0; //Amount of total corners/plots there are
-		x1 = new long[amnt];
-		z1 = new long[amnt];
-		x2 = new long[amnt];
-		z2 = new long[amnt];
-		//loop here to fill the arrays with the actual corners
-		for(int i = 0; i < amnt; i++){
-			World world = null; //Read world from plot here, using integer i
-			if(this.world == world){
-			if(xPos <= x1[i] && xPos >= x2[i]){
-				if(zPos <= z1[i] && zPos >= z2[i]){
-					return true;
-				}
-			}
-		}
-		}
 		return true; //Return false later
-=======
+	}
+
 	public boolean isClaimable(){
 		
-		return true; // All locations are valid, for now.  
->>>>>>> renamed and fixed isPlot function to isClaimable
+		return true; // All locations are valid, for now. 
 	}
 
 	public String getOwner() {
