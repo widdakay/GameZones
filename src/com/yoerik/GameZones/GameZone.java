@@ -26,11 +26,14 @@ public class GameZone {
 	public boolean isPlot(){
 		return true; //Return false later
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	public boolean isClaimable(){
 		
 		return true; // All locations are valid, for now. 
+=======
+>>>>>>> parent of 4e5c255... renamed and fixed isPlot function to isClaimable
 =======
 >>>>>>> parent of 4e5c255... renamed and fixed isPlot function to isClaimable
 	}
