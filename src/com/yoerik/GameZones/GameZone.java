@@ -25,6 +25,14 @@ public class GameZone {
 	}
 
 	public boolean isPlot() {
+		int id = this.getPlotId();
+		if(id == -1){
+			return false;
+		}
+		return true; 
+	}
+	
+	public int getPlotId(){
 		long[] x1;
 		long[] z1;
 		long[] x2;
@@ -42,12 +50,12 @@ public class GameZone {
 			if (this.world == world[i]) {
 				if (xPos <= x1[i] && xPos >= x2[i]) {
 					if (zPos <= z1[i] && zPos >= z2[i]) {
-						return true;
+						return i;
 					}
 				}
 			}
 		}
-		return true; // Return false later
+		return -1;
 	}
 
 	public boolean isClaimable() {
