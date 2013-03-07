@@ -76,12 +76,11 @@ public class GameZone {
 	public GameMode getGamemode(){
 		if(!(this.isPlot())){
 			return null;
-		} else if(this.isPlot()){
+		} else {
 			GameMode gm;
 			gm = null; //Get GameMode here
 			return gm;
 		}
-		return null;
 	}
 
 }
