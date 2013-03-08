@@ -1,8 +1,9 @@
-version: 1
+version: 1      # do not change this, unless if you want your config to regenerate
 
-useMySQL: false	# currently not implemented
+useMySQL: false # currently not implemented
+
 MySQL:
-    username: 	# insert MySQL login info here
+    username:   # insert MySQL login info here
     password: 
 
 

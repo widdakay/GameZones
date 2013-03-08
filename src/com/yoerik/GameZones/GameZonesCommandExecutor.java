@@ -89,7 +89,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 
 		GameZone zone = new GameZone(xPos, zPos, world);
 
-		if (!zone.isPlot()) {
+		if (!(zone.isPlot())) {
 			player.sendMessage("You are not in a zone!");
 		} else {
 
@@ -97,7 +97,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				player.sendMessage("This zone is already claimed by "
 						+ zone.getOwner());
 			} else {
-				if (!zone.claim(player)) {
+				if (!(zone.claim(player))) {
 					player.sendMessage("Could not claim plot.");
 				}
 				return true;

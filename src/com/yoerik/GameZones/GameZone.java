@@ -9,6 +9,7 @@ public class GameZone {
 	long xPos;
 	long zPos;
 	World world;
+	Player owner;
 	
 	private GameZones plugin; // pointer to main class
 

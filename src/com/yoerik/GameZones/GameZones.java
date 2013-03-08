@@ -45,9 +45,9 @@ public class GameZones extends JavaPlugin {
         logger.info((new StringBuilder(String.valueOf(PDF.getName()))).append(" version ").append(PDF.getVersion()).append(" enabled.").toString());
         
         config = getConfig();
-        if(!config.contains("version")) {
-            config.set("version", Integer.valueOf(1));
-            saveConfig();
+        if(config.getInt("version") != 1) {
+        	getConfig().options().copyDefaults(true);
+        	saveDefaultConfig();
         }
         saveDefaultConfig();
         new File(getDataFolder(), "config.yml");
@@ -60,8 +60,8 @@ public class GameZones extends JavaPlugin {
 			c.setAutoCommit(false);
 
 			Statement st = c.createStatement();
-			int rc = st.executeUpdate("SELECT * from version where id=1");		// verify database version
-			logger.info("insert returns " + rc);
+			ResultSet result = st.executeQuery("SELECT version from version where id=1");		// verify database version
+			logger.info("Found database, version "+result.getInt(0));
 
 			ResultSet rs = st.executeQuery("SELECT * FROM zones where id=1");		
 			while (rs.next()) {
@@ -75,12 +75,25 @@ public class GameZones extends JavaPlugin {
 
 		} catch (Exception e) {
 			logger.severe(e.getClass().getName() + ": " + e.getMessage());
+			logger.severe(e.getClass().getName() + ": " + e.getMessage());
 			try {
-				if (c != null && !c.isClosed()) {
-					c.rollback();
-				}
+				logger.info("Creating new table.");
+				
+				Statement st = c.createStatement();
+				int rc = st.executeUpdate("CREATE table version (id INTEGER PRIMARY KEY AUTOINCREMENT, version int)");
+				rc += st.executeUpdate("CREATE table zones (id INTEGER PRIMARY KEY AUTOINCREMENT, x INT, z INT, Owner VARCHAR(32), OwnerMode INT, VisitorMode INT)");
+				st.close();
+				
+				logger.info("Table sucessfully created with "+rc+" row(s) affected.");
+				
 			} catch (SQLException sql) {
-				// ignore
+				try {
+					if (c != null && !c.isClosed()) {
+						c.rollback();
+					}
+				} catch (SQLException ignore) {
+					// ignore
+				}
 			}
 		}
         
