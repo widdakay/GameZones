@@ -1,4 +1,12 @@
 version: 1
+
+useMySQL: false	# currently not implemented
 MySQL:
-    username: # insert MySQL login info here
+    username: 	# insert MySQL login info here
     password: 
+
+
+# worlds to control
+worlds:
+    - world
+ 

@@ -1,7 +1,15 @@
 name: GameZones
+description: A plugin that allows players to divide the world into areas with different gamemodes.
+website: http://yoerik.com/bukkit/GameZones/
+
 main: com.yoerik.GameZones.GameZones
+
 version: 0.1
 author: Widakay
+authors: [Widakay, Pokemon649]
+
+database: true
+depend: [WorldEdit]
 
 commands:
    gz:
