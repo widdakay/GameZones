@@ -63,7 +63,7 @@ public class GameZones extends JavaPlugin {
 			int rc = st.executeUpdate("SELECT * from version where id=1");		// verify database version
 			logger.info("insert returns " + rc);
 
-			ResultSet rs = st.executeQuery("SELECT * FROM zones where id=");		
+			ResultSet rs = st.executeQuery("SELECT * FROM zones where id=1");		
 			while (rs.next()) {
 				int i = rs.getInt(1);
 				String s = rs.getString(2);
@@ -78,7 +78,6 @@ public class GameZones extends JavaPlugin {
 			try {
 				if (c != null && !c.isClosed()) {
 					c.rollback();
-					c.close();
 				}
 			} catch (SQLException sql) {
 				// ignore

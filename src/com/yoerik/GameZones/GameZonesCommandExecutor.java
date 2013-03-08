@@ -16,9 +16,9 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
 @SuppressWarnings("unused")
-public class GameZonesCommandExecutor implements CommandExecutor { 
+public class GameZonesCommandExecutor implements CommandExecutor {
 
-	private GameZones plugin; // pointer to your main class, unrequired
+	private GameZones plugin; // pointer to main class
 
 	public GameZonesCommandExecutor(GameZones plugin) {
 		this.plugin = plugin;
@@ -32,7 +32,6 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 		return null;
 	}
 
-	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 
@@ -70,7 +69,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 						double z1 = sel.getMaximumPoint().getZ();
 						double z2 = sel.getMinimumPoint().getZ();
 						World world = sel.getMaximumPoint().getWorld();
-						//Save points here
+						// Save points here
 						return true;
 					}
 				}
@@ -90,7 +89,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 
 		GameZone zone = new GameZone(xPos, zPos, world);
 
-		if (!(zone.isPlot())) {
+		if (!zone.isPlot()) {
 			player.sendMessage("You are not in a zone!");
 		} else {
 
@@ -98,7 +97,10 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				player.sendMessage("This zone is already claimed by "
 						+ zone.getOwner());
 			} else {
-				return zone.claim(player);
+				if (!zone.claim(player)) {
+					player.sendMessage("Could not claim plot.");
+				}
+				return true;
 			}
 			return true;
 		}

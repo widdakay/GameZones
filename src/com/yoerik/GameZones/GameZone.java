@@ -9,6 +9,8 @@ public class GameZone {
 	long xPos;
 	long zPos;
 	World world;
+	
+	private GameZones plugin; // pointer to main class
 
 	public GameZone(long x, long z, World worldPos) {
 		setPos(x, z, worldPos);
@@ -21,20 +23,43 @@ public class GameZone {
 	}
 
 	public boolean isClaimed() {
-		// TODO Auto-generated method stub
-		
+		try {
+			Statement st = plugin.c.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM zones WHERE x="+xPos+"AND z="+zPos);		// verify database version
+			
+			if (rs.next()) {
+				Array results = rs.getArray(0);
+				if (results.getArray().equals("claimed")) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			plugin.logger.severe(e.getClass().getName() + ": " + e.getMessage());
+			try {
+				if (plugin.c != null && !plugin.c.isClosed()) {
+					plugin.c.rollback();
+				}
+			} catch (SQLException sql) {
+				// ignore
+			}
+		}
 		return false;
 	}
 
 	public boolean isPlot() {
-		int id = this.getPlotId();
-		if(id == -1){
-			return false;
+		// check if world is in config file
+		if (plugin.config.getStringList("worlds").contains(world.getName())) {
+			return true;
 		}
-		return true; 
+		return false;
 	}
-	
-	public int getPlotId(){
+
+	/*public int getPlotId() {
 		long[] x1;
 		long[] z1;
 		long[] x2;
@@ -58,12 +83,12 @@ public class GameZone {
 			}
 		}
 		return -1;
-	}
+	}*/
 
 	public boolean isClaimable() {
 		if (this.isPlot() && !(this.isClaimed())) {
 			return true;
-		} else if(!(this.isPlot()) || this.isClaimed()){
+		} else if (!(this.isPlot()) || this.isClaimed()) {
 			return false;
 		}
 		return false;
@@ -77,18 +102,18 @@ public class GameZone {
 	public boolean claim(Player player) {
 		// TODO Auto-generated method stub
 		if (!(this.isClaimable())) {
-			return false; 
+			return false;
 		}
 		return true;
 
 	}
-	
-	public GameMode getGamemode(){
-		if(!(this.isPlot())){
+
+	public GameMode getGamemode() {
+		if (!(this.isPlot())) {
 			return null;
 		} else {
 			GameMode gm;
-			gm = null; //Get GameMode here
+			gm = null; // Get GameMode here
 			return gm;
 		}
 	}
