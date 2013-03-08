@@ -48,6 +48,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 						sender.sendMessage("This command can only be run by a player.");
 					} else {
 						Player player = (Player) sender;
+						player.sendMessage("Claiming plot.");
 						return claimPlot(player);
 					}
 					return true;

@@ -3,6 +3,7 @@ package com.yoerik.GameZones;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import java.sql.*;
 
 public class GameZone {
 	long xPos;
@@ -21,6 +22,7 @@ public class GameZone {
 
 	public boolean isClaimed() {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

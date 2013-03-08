@@ -1,5 +1,6 @@
 package com.yoerik.GameZones;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -28,12 +29,20 @@ public class GameZones extends JavaPlugin {
 		}
 		
 		this.saveDefaultConfig();
-		//getServer().getPluginManager().registerEvents(new CreativeSurvivalBlockListener(), this);
+		//getServer().getPluginManager().registerEvents(new BlockListener(), this);
 		
 		getCommand("gz").setExecutor(new GameZonesCommandExecutor(this));	// register command
 		
 		PluginDescriptionFile PDF = getDescription();
         logger.info((new StringBuilder(String.valueOf(PDF.getName()))).append(" version ").append(PDF.getVersion()).append(" enabled.").toString());
+        
+        config = getConfig();
+        if(!config.contains("version"))
+            config.set("version", Integer.valueOf(1));
+        saveDefaultConfig();
+        new File(getDataFolder(), "config.yml");
+        
+        
 	}
 
 	public void onDisable() {

@@ -1,0 +1,4 @@
+version: 1
+MySQL:
+    username: # insert MySQL login info here
+    password: 
