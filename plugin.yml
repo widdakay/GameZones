@@ -2,7 +2,7 @@ name: GameZones
 description: A plugin that allows players to divide the world into areas with different gamemodes.
 website: http://yoerik.com/bukkit/GameZones/
 
-main: com.yoerik.GameZones.GameZones
+main: com.yoerik.GameZones.Main
 
 version: 0.1
 author: Widakay

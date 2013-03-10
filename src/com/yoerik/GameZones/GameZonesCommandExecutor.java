@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import com.yoerik.GameZones.GameZones;
+import com.yoerik.GameZones.Main;
 import com.yoerik.GameZones.GameZone;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
@@ -18,9 +18,9 @@ import com.sk89q.worldedit.bukkit.selections.Selection;
 @SuppressWarnings("unused")
 public class GameZonesCommandExecutor implements CommandExecutor {
 
-	private GameZones plugin; // pointer to main class
+	private Main plugin; // pointer to main class
 
-	public GameZonesCommandExecutor(GameZones plugin) {
+	public GameZonesCommandExecutor(Main plugin) {
 		this.plugin = plugin;
 	}
 
@@ -100,6 +100,7 @@ public class GameZonesCommandExecutor implements CommandExecutor {
 				if (!(zone.claim(player))) {
 					player.sendMessage("Could not claim plot.");
 				}
+				zone.saveData();
 				return true;
 			}
 			return true;
